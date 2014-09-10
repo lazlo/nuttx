@@ -218,7 +218,11 @@
 
 #define GPIO_TIM4_CH2OUT GPIO_TIM4_CH2OUT_2
 
-/* SPI - There is a MEMS device on SPI1 using these pins: */
+/* SPI - There is a MEMS device on SPI1 using these pins:
+ *
+ * NOTE: Not part of the original board is a Microchip ENC28J60 Ethernet
+ *       controller that is also connected.
+ */
 
 #define GPIO_SPI5_MISO GPIO_SPI5_MISO_1
 #define GPIO_SPI5_MOSI GPIO_SPI5_MOSI_1
@@ -247,6 +251,15 @@
 
 #define BOARD_LTDC_WIDTH    240
 #define BOARD_LTDC_HEIGHT   320
+
+/* Ethernet
+ *
+ * Not part of the original board.
+ */
+
+#define GPIO_ENC28J60_INTR	(GPIO_INPUT|GPIO_OPENDRAIN|GPIO_EXTI|GPIO_FLOAT|GPIO_PORTA|GPIO_PIN2)
+#define GPIO_ENC28J60_RESET	(GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_50MHz|GPIO_PORTA|GPIO_PIN3)
+#define GPIO_ENC28J60_CS	(GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_50MHz|GPIO_PORTA|GPIO_PIN4)
 
 /************************************************************************************
  * Public Data
