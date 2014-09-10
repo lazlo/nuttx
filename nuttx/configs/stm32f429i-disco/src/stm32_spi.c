@@ -104,7 +104,7 @@ void weak_function stm32_spiinitialize(void)
   /* Configure ENC28J60 SPI5 CS (also RESET and interrupt pins) */
 
 #ifdef CONFIG_ENC28J60
-  stm32_configgpio(GPIO_ENC28J60_CS);
+  stm32_configgpio(GPIO_CS_ENC);
   stm32_configgpio(GPIO_ENC28J60_RESET);
   stm32_configgpio(GPIO_ENC28J60_INTR);
 #endif
@@ -203,7 +203,7 @@ void stm32_spi5select(FAR struct spi_dev_s *dev, enum spi_dev_e devid, bool sele
     {
       /* Set the GPIO low to select and high to de-select */
 
-      stm32_gpiowrite(GPIO_ENC28J60_CS, !selected);
+      stm32_gpiowrite(GPIO_CS_ENC, !selected);
     }
   else
 #endif
