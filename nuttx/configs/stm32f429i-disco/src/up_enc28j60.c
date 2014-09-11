@@ -85,15 +85,15 @@
  * 4   PE5    (no name)      10Mbps ENC28J60 Interrupt
  */
 
-/* ENC28J60 is on SPI5 */
+/* ENC28J60 is on SPI4 */
 
-#ifndef CONFIG_STM32_SPI5
-# error "Need CONFIG_STM32_SPI5 in the configuration"
+#ifndef CONFIG_STM32_SPI4
+# error "Need CONFIG_STM32_SPI4 in the configuration"
 #endif
 
 /* SPI Assumptions **********************************************************/
 
-#define ENC28J60_SPI_PORTNO 5   /* On SPI1 */
+#define ENC28J60_SPI_PORTNO 4   /* On SPI1 */
 #define ENC28J60_DEVNO      0   /* Only one ENC28J60 */
 
 /****************************************************************************
