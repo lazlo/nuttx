@@ -218,17 +218,17 @@
 
 #define GPIO_TIM4_CH2OUT GPIO_TIM4_CH2OUT_2
 
-/* SPI - There is a MEMS device on SPI1 using these pins:
- *
- * NOTE: Not part of the original board is a Microchip ENC28J60 Ethernet
- *       controller that is also connected.
- */
+/* SPI - There is a MEMS device on SPI1 using these pins */
 
 #define GPIO_SPI5_MISO GPIO_SPI5_MISO_1
 #define GPIO_SPI5_MOSI GPIO_SPI5_MOSI_1
 #define GPIO_SPI5_SCK  GPIO_SPI5_SCK_1
 
-/* SPI - External SPI flash may be connected on SPI4: */
+/* SPI - External SPI flash may be connected on SPI4:
+ *
+ * NOTE: Not part of the original board is a Microchip ENC28J60 Ethernet
+ *       controller that is also connected.
+ */
 
 #define GPIO_SPI4_MISO GPIO_SPI4_MISO_1
 #define GPIO_SPI4_MOSI GPIO_SPI4_MOSI_1
