@@ -180,12 +180,15 @@ uint8_t stm32_spi3status(FAR struct spi_dev_s *dev, enum spi_dev_e devid)
 #ifdef CONFIG_STM32_SPI4
 void stm32_spi4select(FAR struct spi_dev_s *dev, enum spi_dev_e devid, bool selected)
 {
+  spidbg("IN");
 #ifdef CONFIG_ENC28J60
   if (devid == SPIDEV_ETHERNET)
     {
       /* Set the GPIO low to select and high to de-select */
 
       stm32_gpiowrite(GPIO_CS_ENC, !selected);
+
+      spidbg("DEBUG: selected ENC\n");
     }
 #endif
 
