@@ -194,6 +194,8 @@ void up_netinitialize(void)
 
   stm32_gpiowrite(GPIO_ENC28J60_RESET, true);
 
+  /* TODO Delay after reset */
+
   /* Bind the SPI port to the ENC28J60 driver */
 
   ret = enc_initialize(spi, &g_enclower.lower, ENC28J60_DEVNO);
