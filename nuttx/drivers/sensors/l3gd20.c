@@ -175,6 +175,8 @@
 #define ST_L3GD20_INT1_DURATION_D_MASK  0x7F
 #define ST_L3GD20_INT1_DURATION_D_SHIFT 0
 
+/* Misc Values **************************************************************/
+
 /* Device identification register value */
 
 #define ST_L3GD20_WHO_AM_I_VALUE 0x4D
