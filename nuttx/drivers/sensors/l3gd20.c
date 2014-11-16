@@ -159,7 +159,7 @@
 
 /* INT1_SRC ----------------------------------------------------------------*/
 
-#define ST_L3GD20_INT1_SRC_AI (1 << 6) /* Interrupt active */
+#define ST_L3GD20_INT1_SRC_IA (1 << 6) /* Interrupt active */
 #define ST_L3GD20_INT1_SRC_ZH (1 << 5) /* Z high */
 #define ST_L3GD20_INT1_SRC_ZL (1 << 4) /* Z low */
 #define ST_L3GD20_INT1_SRC_YH (1 << 3) /* Y high */
