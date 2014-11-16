@@ -99,7 +99,18 @@
  * I2_WTM    (1 << 2)
  * I2_ORun   (1 << 1)
  * I2_Empty  (1 << 0)
- *
+ */
+
+#define ST_L3GD20_CTRL_REG3_I1_Int1    (1 << 7) /* Interrupt enable on INT1 pin */
+#define ST_L3GD20_CTRL_REG3_I1_Boot    (1 << 6) /* Boot status available on INT1 */
+#define ST_L3GD20_CTRL_REG3_H_Lactive  (1 << 5) /* Interrupt active configuration on INT1. */
+#define ST_L3GD20_CTRL_REG3_PP_OD      (1 << 4) /* Push-pull / Open drain */
+#define ST_L3GD20_CTRL_REG3_I2_DRDY    (1 << 3) /* Date-ready on DRDY/INT2 */
+#define ST_L3GD20_CTRL_REG3_I2_WTM     (1 << 2) /* FIFO watermark interrupt on DRDY/INT2 */
+#define ST_L3GD20_CTRL_REG3_I2_ORun    (1 << 1) /* FIFO overrun interrupt on DRDY/INT2 */
+#define ST_L3GD20_CTRL_REG3_I2_Empty   (1 << 0) /* FIFO empty interrupt on DRDY/INT2 */
+
+/*
  * CTRL_REG4
  * BDU       (1 << 7)
  * BLE       (1 << 6)
