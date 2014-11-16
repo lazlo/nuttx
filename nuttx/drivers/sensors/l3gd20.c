@@ -19,7 +19,7 @@
  * Pre-processor Definitions
  ****************************************************************************/
 
-/* Register Addreses */
+/* Register Addreses ********************************************************/
 
 #define ST_L3GD20_WHO_AM_I      0x0f
 #define ST_L3GD20_CTRL_REG1     0x20
@@ -48,16 +48,9 @@
 #define ST_L3GD20_INT1_THS_ZL   0x37
 #define ST_L3GD20_INT1_DURATION 0x38
 
-/* CTRL_REG1
- *_DR1  (1 << 7)
- * DR0  (1 << 6)
- * BW1  (1 << 5)
- * BW0  (1 << 4)
- * PD   (1 << 3)
- * Zen  (1 << 2)
- * Xen  (1 << 1)
- * Yen  (1 << 0)
- */
+/* Register Bits and Fields *************************************************/
+
+/* CTRL_REG1 ---------------------------------------------------------------*/
 
 /* Output Data Rate selection */
 
@@ -74,15 +67,7 @@
 #define ST_L3GD20_CTRL_REG1_Xen (1 << 1)
 #define ST_L3GD20_CTRL_REG1_Yen (1 << 0)
 
-/*
- * CTRL_REG2
- * HPM1      (1 << 5)
- * HPM0      (1 << 4)
- * HPCF3     (1 << 3)
- * HPCF2     (1 << 2)
- * HPCF1     (1 << 1)
- * HPCF1     (1 << 0)
- */
+/* CTRL_REG2 ---------------------------------------------------------------*/
 
 /* High-pass filter mode selection */
 
@@ -94,17 +79,7 @@
 #define ST_L3GD20_CTRL_REG2_HPCF_MASK 0x0F
 #define ST_L3GD20_CTRL_REG2_HPCF_SHIFT 0
 
-/*
- * CTRL_REG3
- * I1_Int1   (1 << 7)
- * I1_Boot   (1 << 6)
- * H_Lactive (1 << 5)
- * PP_OD     (1 << 4)
- * I2_DRDY   (1 << 3)
- * I2_WTM    (1 << 2)
- * I2_ORun   (1 << 1)
- * I2_Empty  (1 << 0)
- */
+/* CTRL_REG3 ---------------------------------------------------------------*/
 
 #define ST_L3GD20_CTRL_REG3_I1_Int1    (1 << 7) /* Interrupt enable on INT1 pin */
 #define ST_L3GD20_CTRL_REG3_I1_Boot    (1 << 6) /* Boot status available on INT1 */
@@ -115,14 +90,7 @@
 #define ST_L3GD20_CTRL_REG3_I2_ORun    (1 << 1) /* FIFO overrun interrupt on DRDY/INT2 */
 #define ST_L3GD20_CTRL_REG3_I2_Empty   (1 << 0) /* FIFO empty interrupt on DRDY/INT2 */
 
-/*
- * CTRL_REG4
- * BDU       (1 << 7)
- * BLE       (1 << 6)
- * FS1       (1 << 5)
- * FS0       (1 << 4)
- * SIM       (1 << 0)
- */
+/* CTRL_REG4 ---------------------------------------------------------------*/
 
 #define ST_L3GD20_CTRL_REG4_BDU (1 << 7) /* Block data update */
 #define ST_L3GD20_CTRL_REG4_BLE (1 << 6) /* Big/little endian data selection */
@@ -133,17 +101,7 @@
 
 #define ST_L3GD20_CTRL_REG4_SIM (1 << 0) /* SPI serial interface mode selection */
 
-
-/*
- * CTRL_REG5
- * BOOT      (1 << 7)
- * FIFO_EN   (1 << 6)
- * HPen      (1 << 4)
- * INT1_Sel1 (1 << 3)
- * INT1_Sel0 (1 << 2)
- * Out_Sel1  (1 << 1)
- * Out_Sel0  (1 << 0)
- */
+/* CTRL_REG5 ---------------------------------------------------------------*/
 
 #define ST_L3GD20_CTRL_REG5_BOOT    (7 << 1) /* Reboot memory content */
 #define ST_L3GD20_CTRL_REG5_FIFO_EN (1 << 6) /* FIFO enable */
@@ -157,17 +115,7 @@
 #define ST_L3GD20_CTRL_REG5_Out_Sel_MASK   0x03
 #define ST_L3GD20_CTRL_REG5_Out_Sel_SHIFT  0
 
-/*
- * STATUS_REG
- * ZYXOR     (1 << 7)
- * ZOR       (1 << 6)
- * YOR       (1 << 5)
- * XOR       (1 << 4)
- * ZYXDA     (1 << 3)
- * ZDA       (1 << 2)
- * YDA       (1 << 1)
- * XDA       (1 << 0)
- */
+/* STATUS_REG --------------------------------------------------------------*/
 
 #define ST_L3GD20_STATUS_REG_ZYXOR (1 << 7) /* X, Y, Z-axis overrun */
 #define ST_L3GD20_STATUS_REG_ZOR   (1 << 6) /* Z axis data overrun */
@@ -178,17 +126,7 @@
 #define ST_L3GD20_STATUS_REG_YDA   (1 << 1) /* Y axis new data available */
 #define ST_L3GD20_STATUS_REG_XDA   (1 << 0) /* X axis new data available */
 
-/*
- * FIFO_CTRL_REG
- * FM2       (1 << 7)
- * FM1       (1 << 6)
- * FM0       (1 << 5)
- * WTM4      (1 << 4)
- * WTM3      (1 << 3)
- * WTM2      (1 << 2)
- * WTM1      (1 << 1)
- * WTM0      (1 << 0)
- */
+/* FIFO_CTRL_REG -----------------------------------------------------------*/
 
 /* FIFO mode selection */
 #define ST_L3GD20_FIFO_CTRL_REG_FM_MASK         0xE0
@@ -198,17 +136,7 @@
 #define ST_L3GD20_FIFO_CTRL_REG_WTM_MASK        0x1F
 #define ST_L3GD20_FIFO_CTRL_REG_WTM_SHIFT       0
 
-/*
- * FIFO_SRC_REG
- * WTM
- * OVRN
- * EMPTY
- * FSS4
- * FSS3
- * FSS2
- * FSS1
- * FSS0
- */
+/* FIFO_SRC_REG ------------------------------------------------------------*/
 
 #define ST_L3GD20_FIFO_SRC_REG_WTM   (1 << 7) /* Watermark status */
 #define ST_L3GD20_FIFO_SRC_REG_OVRN  (1 << 6) /* Overrun bit status */
@@ -218,17 +146,7 @@
 #define ST_L3GD20_FIFO_SRC_REG_FSS_MASK  0x1F
 #define ST_L3GD20_FIFO_SRC_REG_FSS_SHIFT 0
 
-/*
- * INT1_CFG
- * AND/OR
- * LIR
- * ZHIE
- * ZLIE
- * YHIE
- * YLIE
- * XHIE
- * XLIE
- */
+/* INT1_CFG ----------------------------------------------------------------*/
 
 #define ST_L3GD20_INT1_CFG_AND_OR (1 << 7) /* AND/OR combination of interrupt events */
 #define ST_L3GD20_INT1_CFG_LIR    (1 << 6) /* Latch interrupt request */
@@ -239,16 +157,7 @@
 #define ST_L3GD20_INT1_CFG_XHIE   (1 << 1) /* Enable interrupt generation on X high event */
 #define ST_L3GD20_INT1_CFG_XLIE   (1 << 0) /* Enable interrupt generation on X low event */
 
-/*
- * INT1_SRC
- * IA  (1 << 6)
- * ZH  (1 << 5)
- * ZL  (1 << 4)
- * YH  (1 << 3)
- * YL  (1 << 2)
- * XH  (1 << 1)
- * XL  (1 << 0)
- */
+/* INT1_SRC ----------------------------------------------------------------*/
 
 #define ST_L3GD20_INT1_SRC_AI (1 << 6) /* Interrupt active */
 #define ST_L3GD20_INT1_SRC_ZH (1 << 5) /* Z high */
@@ -258,17 +167,7 @@
 #define ST_L3GD20_INT1_SRC_XH (1 << 1) /* X high */
 #define ST_L3GD20_INT1_SRC_XL (1 << 0) /* X low */
 
-/*
- * INT1_DURATION
- * WAIT
- * D6
- * D5
- * D4
- * D3
- * D2
- * D1
- * D0
- */
+/* INT1_DURATION -----------------------------------------------------------*/
 
 #define ST_L3GD20_INT1_DURATION_WAIT (1 << 7) /* WAIT enable */
 
