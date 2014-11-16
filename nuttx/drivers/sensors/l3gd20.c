@@ -216,9 +216,10 @@ static int l3gd20_access(FAR struct l3gd20_dev_s *dev, uint8_t subaddr,
       length = -length;
     }
 
-  /* TODO Validate subaddress */
+  /* Validate subaddress */
 
-  if (subaddr < ST_L3GD20_WHO_AM_I || subaddr > ST_L3GD20_INT1_DURATION)
+  if ((subaddr != ST_L3GD20_WHO_AM_I) &&
+      (subaddr < ST_L3GD20_CTRL_REG1 || subaddr > ST_L3GD20_INT1_DURATION))
     {
       errno = EFAULT;
       return ERROR;
