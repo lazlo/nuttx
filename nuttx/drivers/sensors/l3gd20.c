@@ -69,6 +69,11 @@
 #define ST_L3GD20_CTRL_REG1_BW_MASK  3
 #define ST_L3GD20_CTRL_REG1_BW_SHIFT 4
 
+#define ST_L3GD20_CTRL_REG1_PD  (1 << 3)
+#define ST_L3GD20_CTRL_REG1_Zen (1 << 2)
+#define ST_L3GD20_CTRL_REG1_Xen (1 << 1)
+#define ST_L3GD20_CTRL_REG1_Yen (1 << 0)
+
 /*
  * CTRL_REG2
  * HPM1      (1 << 5)
@@ -117,7 +122,19 @@
  * FS1       (1 << 5)
  * FS0       (1 << 4)
  * SIM       (1 << 0)
- *
+ */
+
+#define ST_L3GD20_CTRL_REG4_BDU (1 << 7) /* Block data update */
+#define ST_L3GD20_CTRL_REG4_BLE (1 << 6) /* Big/little endian data selection */
+
+/* Full scale selection */
+#define ST_L3GD20_CTRL_REG4_FS_MASK 0x30
+#define ST_L3GD20_CTRL_REG4_FS_SHIFT 4
+
+#define ST_L3GD20_CTRL_REG4_SIM (1 << 0) /* SPI serial interface mode selection */
+
+
+/*
  * CTRL_REG5
  * BOOT      (1 << 7)
  * FIFO_EN   (1 << 6)
@@ -126,7 +143,21 @@
  * INT1_Sel0 (1 << 2)
  * Out_Sel1  (1 << 1)
  * Out_Sel0  (1 << 0)
- *
+ */
+
+#define ST_L3GD20_CTRL_REG5_BOOT    (7 << 1) /* Reboot memory content */
+#define ST_L3GD20_CTRL_REG5_FIFO_EN (1 << 6) /* FIFO enable */
+#define ST_L3GD20_CTRL_REG5_HPen    (1 << 4) /* High-pass filter enable */
+
+/* INT1 selection configuration */
+#define ST_L3GD20_CTRL_REG5_INT1_Sel_MASK  0x0B
+#define ST_L3GD20_CTRL_REG5_INT1_Sel_SHIFT 2
+
+/* Out selection configuration */
+#define ST_L3GD20_CTRL_REG5_Out_Sel_MASK   0x03
+#define ST_L3GD20_CTRL_REG5_Out_Sel_SHIFT  0
+
+/*
  * STATUS_REG
  * ZYXOR     (1 << 7)
  * ZOR       (1 << 6)
@@ -136,7 +167,18 @@
  * ZDA       (1 << 2)
  * YDA       (1 << 1)
  * XDA       (1 << 0)
- *
+ */
+
+#define ST_L3GD20_STATUS_REG_ZYXOR (1 << 7) /* X, Y, Z-axis overrun */
+#define ST_L3GD20_STATUS_REG_ZOR   (1 << 6) /* Z axis data overrun */
+#define ST_L3GD20_STATUS_REG_YOR   (1 << 5) /* Y axis data overrun */
+#define ST_L3GD20_STATUS_REG_XOR   (1 << 4) /* X axis data overrun */
+#define ST_L3GD20_STATUS_REG_ZYXDA (1 << 3) /* X, Y, Z-axis data available */
+#define ST_L3GD20_STATUS_REG_ZDA   (1 << 2) /* Z axis new data available */
+#define ST_L3GD20_STATUS_REG_YDA   (1 << 1) /* Y axis new data available */
+#define ST_L3GD20_STATUS_REG_XDA   (1 << 0) /* X axis new data available */
+
+/*
  * FIFO_CTRL_REG
  * FM2       (1 << 7)
  * FM1       (1 << 6)
@@ -148,8 +190,11 @@
  * WTM0      (1 << 0)
  */
 
+/* FIFO mode selection */
 #define ST_L3GD20_FIFO_CTRL_REG_FM_MASK         0xE0
 #define ST_L3GD20_FIFO_CTRL_REG_FM_SHIFT        5
+
+/* FIFO threshold */
 #define ST_L3GD20_FIFO_CTRL_REG_WTM_MASK        0x1F
 #define ST_L3GD20_FIFO_CTRL_REG_WTM_SHIFT       0
 
@@ -163,7 +208,17 @@
  * FSS2
  * FSS1
  * FSS0
- *
+ */
+
+#define ST_L3GD20_FIFO_SRC_REG_WTM   (1 << 7) /* Watermark status */
+#define ST_L3GD20_FIFO_SRC_REG_OVRN  (1 << 6) /* Overrun bit status */
+#define ST_L3GD20_FIFO_SRC_REG_EMPTY (1 << 5) /* FIFO empty bit */
+
+/* FIFO stored data level */
+#define ST_L3GD20_FIFO_SRC_REG_FSS_MASK  0x1F
+#define ST_L3GD20_FIFO_SRC_REG_FSS_SHIFT 0
+
+/*
  * INT1_CFG
  * AND/OR
  * LIR
@@ -173,7 +228,18 @@
  * YLIE
  * XHIE
  * XLIE
- *
+ */
+
+#define ST_L3GD20_INT1_CFG_AND_OR (1 << 7) /* AND/OR combination of interrupt events */
+#define ST_L3GD20_INT1_CFG_LIR    (1 << 6) /* Latch interrupt request */
+#define ST_L3GD20_INT1_CFG_ZHIE   (1 << 5) /* Enable interrupt generation on Z high event */
+#define ST_L3GD20_INT1_CFG_ZLIE   (1 << 4) /* Enable interrupt generation on Z low evet */
+#define ST_L3GD20_INT1_CFG_YHIE   (1 << 3) /* Enable interrupt generation on Y high event */
+#define ST_L3GD20_INT1_CFG_YLIE   (1 << 2) /* Enable interrupt generation on Y low event */
+#define ST_L3GD20_INT1_CFG_XHIE   (1 << 1) /* Enable interrupt generation on X high event */
+#define ST_L3GD20_INT1_CFG_XLIE   (1 << 0) /* Enable interrupt generation on X low event */
+
+/*
  * INT1_SRC
  * IA  (1 << 6)
  * ZH  (1 << 5)
@@ -182,17 +248,33 @@
  * YL  (1 << 2)
  * XH  (1 << 1)
  * XL  (1 << 0)
- *
+ */
+
+#define ST_L3GD20_INT1_SRC_AI (1 << 6) /* Interrupt active */
+#define ST_L3GD20_INT1_SRC_ZH (1 << 5) /* Z high */
+#define ST_L3GD20_INT1_SRC_ZL (1 << 4) /* Z low */
+#define ST_L3GD20_INT1_SRC_YH (1 << 3) /* Y high */
+#define ST_L3GD20_INT1_SRC_YL (1 << 2) /* Y low */
+#define ST_L3GD20_INT1_SRC_XH (1 << 1) /* X high */
+#define ST_L3GD20_INT1_SRC_XL (1 << 0) /* X low */
+
+/*
  * INT1_DURATION
  * WAIT
  * D6
- * D6
+ * D5
  * D4
  * D3
  * D2
  * D1
  * D0
  */
+
+#define ST_L3GD20_INT1_DURATION_WAIT (1 << 7) /* WAIT enable */
+
+/* Duration value */
+#define ST_L3GD20_INT1_DURATION_D_MASK  0x7F
+#define ST_L3GD20_INT1_DURATION_D_SHIFT 0
 
 /* Device identification register value */
 
