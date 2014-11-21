@@ -224,7 +224,11 @@
 #define GPIO_SPI5_MOSI GPIO_SPI5_MOSI_1
 #define GPIO_SPI5_SCK  GPIO_SPI5_SCK_1
 
-/* SPI - External SPI flash may be connected on SPI4: */
+/* SPI - External SPI flash may be connected on SPI4:
+ *
+ * NOTE: Not part of the original board is a Microchip ENC28J60 Ethernet
+ *       controller that is also connected.
+ */
 
 #define GPIO_SPI4_MISO GPIO_SPI4_MISO_1
 #define GPIO_SPI4_MOSI GPIO_SPI4_MOSI_1
@@ -258,6 +262,14 @@
 #define GPIO_DCF1_LED	(GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_PORTF|GPIO_PIN2)
 #define GPIO_DCF1_PON	(GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_PORTF|GPIO_PIN4)
 #define GPIO_DCF1_DATA	(GPIO_INPUT|GPIO_EXTI|GPIO_OPENDRAIN|GPIO_PORTF|GPIO_PIN5)
+
+/* Ethernet
+ *
+ * Not part of the original board.
+ */
+
+#define GPIO_ENC28J60_INTR	(GPIO_INPUT|GPIO_OPENDRAIN|GPIO_EXTI|GPIO_FLOAT|GPIO_PORTC|GPIO_PIN12)
+#define GPIO_ENC28J60_RESET	(GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_50MHz|GPIO_PORTC|GPIO_PIN13)
 
 /************************************************************************************
  * Public Data

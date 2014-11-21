@@ -84,6 +84,10 @@ ifeq ($(CONFIG_RADIO_DCF1),y)
 CSRCS += up_dcf1.c
 endif
 
+ifeq ($(CONFIG_ENC28J60),y)
+CSRCS += up_enc28j60.c
+endif
+
 COBJS = $(CSRCS:.c=$(OBJEXT))
 
 SRCS = $(ASRCS) $(CSRCS)

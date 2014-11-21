@@ -101,6 +101,16 @@ void weak_function stm32_spiinitialize(void)
   (void)stm32_configgpio(GPIO_LCD_DC);     /* LCD Data/Command select */
   (void)stm32_configgpio(GPIO_LCD_ENABLE); /* LCD enable select */
 #endif
+
+#if defined(CONFIG_STM32_SPI4) && defined(CONFIG_ENC28J60)
+
+  /* Configure ENC28J60 SPI4 CS (also RESET and interrupt pins) */
+
+  stm32_configgpio(GPIO_CS_ENC);
+  stm32_configgpio(GPIO_ENC28J60_RESET);
+  stm32_configgpio(GPIO_ENC28J60_INTR);
+#endif
+
 #if defined(CONFIG_STM32_SPI4) && defined(CONFIG_MTD_SST25XX)
   (void)stm32_configgpio(GPIO_CS_SST25);   /* SST25 FLASH chip select */
 #endif
@@ -170,6 +180,18 @@ uint8_t stm32_spi3status(FAR struct spi_dev_s *dev, enum spi_dev_e devid)
 #ifdef CONFIG_STM32_SPI4
 void stm32_spi4select(FAR struct spi_dev_s *dev, enum spi_dev_e devid, bool selected)
 {
+  spidbg("IN");
+#ifdef CONFIG_ENC28J60
+  if (devid == SPIDEV_ETHERNET)
+    {
+      /* Set the GPIO low to select and high to de-select */
+
+      stm32_gpiowrite(GPIO_CS_ENC, !selected);
+
+      spidbg("DEBUG: selected ENC\n");
+    }
+#endif
+
 #if defined(CONFIG_MTD_SST25XX)
   if (devid == SPIDEV_FLASH)
     {
