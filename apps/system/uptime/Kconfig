@@ -1,0 +1,13 @@
+#
+# For a description of the syntax of this configuration file,
+# see misc/tools/kconfig-language.txt.
+#
+
+config SYSTEM_UPTIME
+	bool "Uptime utility"
+	default n
+	---help---
+		Enable the uptime utility
+
+if SYSTEM_UPTIME
+endif
