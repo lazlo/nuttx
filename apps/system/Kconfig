@@ -71,6 +71,10 @@ menu "Sysinfo"
 source "$APPSDIR/system/sysinfo/Kconfig"
 endmenu
 
+menu "Uptime"
+source "$APPSDIR/system/uptime/Kconfig"
+endmenu
+
 menu "VI Work-Alike Editor"
 source "$APPSDIR/system/vi/Kconfig"
 endmenu
