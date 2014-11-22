@@ -1,7 +1,7 @@
 ############################################################################
-# apps/system/Makefile
+# apps/system/uptime/Makefile
 #
-#   Copyright (C) 2011-2014 Gregory Nutt. All rights reserved.
+#   Copyright (C) 2008, 2010-2013 Gregory Nutt. All rights reserved.
 #   Author: Gregory Nutt <gnutt@nuttx.org>
 #
 # Redistribution and use in source and binary forms, with or without
@@ -33,48 +33,77 @@
 #
 ############################################################################
 
--include $(TOPDIR)/.config	# Current configuration
+-include $(TOPDIR)/.config
+-include $(TOPDIR)/Make.defs
+include $(APPDIR)/Make.defs
 
-# Sub-directories containing system task
+# Uptime built-in application info
 
-SUBDIRS  = cdcacm cle composite flash_eraseall free i2c hex2bin inifile
-SUBDIRS += install mdio nxplayer poweroff ramtest ramtron readline sdcard
-SUBDIRS += stackmonitor sudoku sysinfo uptime usbmonitor usbmsc vi zmodem
+APPNAME		= uptime
+PRIORITY	= SCHED_PRIORITY_DEFAULT
+STACKSIZE	= 2048
 
-# Create the list of installed runtime modules (INSTALLED_DIRS)
+# Uptime Example
+
+ASRCS		=
+CSRCS		= uptime_main.c
+
+AOBJS		= $(ASRCS:.S=$(OBJEXT))
+COBJS		= $(CSRCS:.c=$(OBJEXT))
+
+SRCS		= $(ASRCS) $(CSRCS)
+OBJS		= $(AOBJS) $(COBJS)
 
 ifeq ($(CONFIG_WINDOWS_NATIVE),y)
-define ADD_DIRECTORY
-  INSTALLED_DIRS  += $(if $(wildcard .\$1\Makefile),$1,)
-endef
+  BIN		= ..\..\libapps$(LIBEXT)
 else
-define ADD_DIRECTORY
-  INSTALLED_DIRS  += $(if $(wildcard ./$1/Makefile),$1,)
-endef
+ifeq ($(WINTOOL),y)
+  BIN		= ..\\..\\libapps$(LIBEXT)
+else
+  BIN		= ../../libapps$(LIBEXT)
+endif
 endif
 
-$(foreach DIR, $(SUBDIRS), $(eval $(call ADD_DIRECTORY,$(DIR))))
+ROOTDEPPATH	= --dep-path .
 
-all: nothing
-.PHONY: nothing context depend clean distclean
+# Common build
 
-define SDIR_template
-$(1)_$(2):
-	$(Q) $(MAKE) -C $(1) $(2) TOPDIR="$(TOPDIR)" APPDIR="$(APPDIR)"
-endef
+VPATH		=
 
-$(foreach SDIR, $(INSTALLED_DIRS), $(eval $(call SDIR_template,$(SDIR),depend)))
-$(foreach SDIR, $(INSTALLED_DIRS), $(eval $(call SDIR_template,$(SDIR),clean)))
-$(foreach SDIR, $(INSTALLED_DIRS), $(eval $(call SDIR_template,$(SDIR),distclean)))
+all: .built
+.PHONY: clean depend distclean
 
-nothing:
+$(AOBJS): %$(OBJEXT): %.S
+	$(call ASSEMBLE, $<, $@)
 
-install:
+$(COBJS): %$(OBJEXT): %.c
+	$(call COMPILE, $<, $@)
 
+.built: $(OBJS)
+	$(call ARCHIVE, $(BIN), $(OBJS))
+	@touch .built
+
+ifeq ($(CONFIG_NSH_BUILTIN_APPS),y)
+$(BUILTIN_REGISTRY)$(DELIM)$(APPNAME)_main.bdat: $(DEPCONFIG) Makefile
+	$(call REGISTER,$(APPNAME),$(PRIORITY),$(STACKSIZE),$(APPNAME)_main)
+
+context: $(BUILTIN_REGISTRY)$(DELIM)$(APPNAME)_main.bdat
+else
 context:
+endif
 
-depend: $(foreach SDIR, $(INSTALLED_DIRS), $(SDIR)_depend)
+.depend: Makefile $(SRCS)
+	@$(MKDEP) $(ROOTDEPPATH) "$(CC)" -- $(CFLAGS) -- $(SRCS) >Make.dep
+	@touch $@
 
-clean: $(foreach SDIR, $(INSTALLED_DIRS), $(SDIR)_clean)
+depend: .depend
 
-distclean: $(foreach SDIR, $(INSTALLED_DIRS), $(SDIR)_distclean)
+clean:
+	$(call DELFILE, .built)
+	$(call CLEAN)
+
+distclean: clean
+	$(call DELFILE, Make.dep)
+	$(call DELFILE, .depend)
+
+-include Make.dep
